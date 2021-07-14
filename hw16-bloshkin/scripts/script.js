@@ -1,4 +1,4 @@
-(function () {
+(function (api) {
   const loginInputEl = document.getElementById("login-input");
   const passwordInputEl = document.getElementById("password-input");
   const signInBtnEl = document.getElementById("sign-in-btn");
@@ -38,7 +38,8 @@
     const login = loginInputEl.value;
     const password = passwordInputEl.value;
 
-    checkUserCredentials(login, password)
+    api
+      .checkUserCredentials(login, password)
       .then((e) => {
         console.log("then was applied");
         document.getElementById("login-form").remove();
@@ -49,7 +50,7 @@
         errorMessageEl.classList.remove("hidden");
       })
       .then(() => {
-        return getUserList();
+        return api.getUserList();
       })
       .then((e) => {
         console.log(e);
@@ -63,4 +64,4 @@
         console.log("another catch was applied");
       });
   });
-})();
+})(apiModule);
